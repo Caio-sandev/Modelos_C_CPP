@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "dados.h"
 
+int id_global = 0;
+
 struct Tipo
 {
 	int id;
@@ -10,20 +12,20 @@ struct Tipo
 
 struct Tipo* tipo_criarTudo(int id, void* dados)
 {
-	struct Tipo* novo_tipo = (struct Tipo*)malloc(1 * struct novo_tipo);
-
+	struct Tipo* novo_tipo = (struct Tipo*)malloc(1 * sizeof(struct Tipo));
+	
 	if (!novo_tipo)
 		return NULL;
-
+	
 	novo_tipo->id = id;
 	novo_tipo->dados = dados;
-
+	
 	return novo_tipo;
 }
 
 struct Tipo* tipo_criarZerado()
 {
-	struct Tipo* novo_tipo = (struct Tipo*)malloc(1 * struct novo_tipo);
+	struct Tipo* novo_tipo = (struct Tipo*)malloc(1 * sizeof(struct Tipo));
 
 	if (!novo_tipo)
 		return NULL;

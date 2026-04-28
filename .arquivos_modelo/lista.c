@@ -8,31 +8,31 @@ struct lista_tipo_t
 	struct lista_tipo_t* proximo;
 };
 
-struct lista_tipo_t lista_anexarUltimo(struct lista_tipo_t* lista_tipo, struct Tipo* tipo)
+struct lista_tipo_t* lista_anexarUltimo(struct lista_tipo_t* lista_tipo, struct Tipo* tipo)
 {
 	struct lista_tipo_t* tmp_lista_tipo;
-	struct lista_tipo_t* novo_no_tipo = (struct lista_tipo_t*)malloc(1 * sizeof(lista_tipo_t));
+	struct lista_tipo_t* novo_no = (struct lista_tipo_t*)malloc(1 * sizeof(struct lista_tipo_t));
 
-	if (!novo_no_tipo)
+	if (!novo_no)
 		return NULL;
 
-	novo_no_tipo->tipo = tipo;
-	novo_no_tipo->proximo = NULL;
+	novo_no->tipo = tipo;
+	novo_no->proximo = NULL;
 
 	if (!lista_tipo)
-		return novo_no_tipo;
+		return novo_no;
 
 	for (tmp_lista_tipo = lista_tipo; tmp_lista_tipo->proximo; tmp_lista_tipo = tmp_lista_tipo->proximo);
-	tmp_lista_tipo->proximo = novo_no_tipo;
+	tmp_lista_tipo->proximo = novo_no;
 
 	return lista_tipo;
 }
 
-struct lista_tipo_t lista_anexarPrimeiro(struct lista_tipo_t* lista_tipo, struct Tipo* tipo)
+struct lista_tipo_t* lista_anexarPrimeiro(struct lista_tipo_t* lista_tipo, struct Tipo* tipo)
 {
-	struct lista_tipo_t* novo_no = (struct lista_tipo_t*)malloc(1 * sizeof(lista_tipo_t));
+	struct lista_tipo_t* novo_no = (struct lista_tipo_t*)malloc(1 * sizeof(struct lista_tipo_t));
 
-	if (!novo_no_tipo)
+	if (!novo_no)
 		return NULL;
 
 	novo_no->tipo = tipo;
@@ -45,7 +45,7 @@ void lista_deletarUltimo(struct lista_tipo_t** lista_tipo)
 {
 	struct lista_tipo_t* tmp_lista_tipo; 
 
-	for (tmp_lista_tipo = *lista_tipo; tmp_lista_tipo->proximo; tmp_lista_tipo = tmp_lista_tipo = tmpo_lista_tipo->proximo);
+	for (tmp_lista_tipo = *lista_tipo; tmp_lista_tipo->proximo; tmp_lista_tipo = tmp_lista_tipo = tmp_lista_tipo->proximo);
 	tipo_deletar(&(tmp_lista_tipo->tipo));
 	free(tmp_lista_tipo);
 	tmp_lista_tipo = NULL;
@@ -58,7 +58,7 @@ void lista_deletarPrimeiro(struct lista_tipo_t** lista_tipo)
 	struct lista_tipo_t* tmp_lista_tipo;
 
 	tmp_lista_tipo = (*lista_tipo)->proximo;
-	tipo_deletar((*lista_tipo)->tipo);
+	tipo_deletar(&((*lista_tipo)->tipo));
 	free(*lista_tipo);
 	*lista_tipo = tmp_lista_tipo;
 

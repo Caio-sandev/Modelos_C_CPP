@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int id_global;
+int extern id_global;
 
 struct Tipo;
 

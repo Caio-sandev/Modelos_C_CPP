@@ -6,20 +6,13 @@
 class NoTipo
 {
 	public:
-		Tipo* tipo;
+		Tipo tipo;
 		NoTipo* proximo = NULL;
 
-		NoTipo(Tipo* tipo)
+		NoTipo(Tipo& tipo)
 		{
 			this->tipo = tipo;
-			proximo = NULL;
 		}
-
-		NoTipo()
-		{
-			tipo = NULL;
-			proximo = NULL;
-		}	
 };
 
 class ListaTipo
@@ -28,17 +21,45 @@ class ListaTipo
 		NoTipo* no_principal;
 
 	public:
-		ListaTipo(Tipo* tipo)
+		struct Iterador
+		{	
+			NoTipo* no_iterador;
+			
+			Tipo& operator*()
+			{
+				return no_iterador->tipo;
+			}
+
+			Iterador& operator++()
+			{
+				if (no_iterador)
+					no_iterador = no_iterador->proximo;
+
+				return *this;
+			}
+
+			bool operator!=(const Iterador& outro) const
+			{
+				return no_iterador != outro.no_iterador;
+			}
+		};
+
+		Iterador begin()
+		{
+			return Iterador{ no_principal };
+		}
+
+		Iterador end()
+		{
+			return Iterador{ NULL };
+		}
+
+		ListaTipo(Tipo& tipo)
 		{
 			no_principal = new NoTipo(tipo);
 		}
 
-		ListaTipo()
-		{
-			no_principal = new NoTipo;
-		}
-
-		void anexarPorUltimoNaLista(Tipo* tipo)
+		void anexarPorUltimoNaLista(Tipo& tipo)
 		{
 			NoTipo* tmp_no;
 			NoTipo* novo_no = new NoTipo(tipo);
@@ -49,7 +70,7 @@ class ListaTipo
 			return;
 		}
 
-		void anexarEmPrimeiroNaLista(Tipo* tipo)
+		void anexarEmPrimeiroNaLista(Tipo& tipo)
 		{
 			NoTipo* tmp_no;
 			NoTipo* novo_no = new NoTipo(tipo);
@@ -64,12 +85,14 @@ class ListaTipo
 		void deletarPorUltimoNaLista()
 		{
 			NoTipo* tmp_no;
+			
+			if (!no_principal)
+				return;
 
-			for (tmp_no = no_principal, tmp_no->proximo; tmp_no = tmp_no->proximo);
-			delete tmp_no->tipo;
-			delete tmp_no;
-			tmp_no = NULL;
-
+			for (tmp_no = no_principal; tmp_no->proximo->proximo; tmp_no = tmp_no->proximo);
+			delete tmp_no->proximo;
+			tmp_no->proximo = NULL;
+			
 			return;
 		}
 
@@ -77,7 +100,9 @@ class ListaTipo
 		{
 			NoTipo* tmp_no = no_principal->proximo;
 
-			delete no_principal->tipo;
+			if (!no_principal)
+				return;
+
 			delete no_principal;
 			no_principal = tmp_no;
 
@@ -88,8 +113,8 @@ class ListaTipo
 		{
 			NoTipo* tmp_lista;
 
-			for (tmp_lista = no_principal; tmp_lista->proximo; tmp_lista = tmp_lista->proximo){
-				tmp_lista->tipo->exibir();
+			for (tmp_lista = no_principal; tmp_lista; tmp_lista = tmp_lista->proximo){
+				tmp_lista->tipo.exibir();
 			}
 
 			return;
@@ -99,11 +124,14 @@ class ListaTipo
 		{
 			NoTipo* tmp_no;
 
-			for (tmp_no = no_principal; id != tmp_no->tipo->pegarId() && tmp_no; tmp_no = tmp_no->proximo);
-			if (!tmp_no)
-				return NULL;
+			for (tmp_no = no_principal; tmp_no->proximo; tmp_no = tmp_no->proximo){
+				int tipo_id = tmp_no->tipo.pegarId();
 
-			return tmp_no->tipo;
+				if (tipo_id == id)
+					tmp_tipo = &(tmp_no->tipo);
+			}	
+
+			return tmp_tipo;
 		}
 };	
 
