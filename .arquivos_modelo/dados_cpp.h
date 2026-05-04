@@ -15,6 +15,8 @@ class Tipo
 
 		Tipo(void* dados)
 		{
+			static int id_global = 0;
+
 			id = id_global;
 			id_global++;
 

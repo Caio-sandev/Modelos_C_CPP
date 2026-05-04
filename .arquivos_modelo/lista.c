@@ -8,11 +8,20 @@ struct lista_tipo_t
 	struct lista_tipo_t* proximo;
 };
 
+int lista_naoInicializada(struct lista_tipo_t* lista_tipo)
+{
+	if (!lista_tipo){
+		printf("Lista Nao Incializada\n");
+		return 1;
+	}
+
+	return 0;
+}
+
 struct lista_tipo_t* lista_anexarUltimo(struct lista_tipo_t* lista_tipo, struct Tipo* tipo)
 {
 	struct lista_tipo_t* tmp_lista_tipo;
 	struct lista_tipo_t* novo_no = (struct lista_tipo_t*)malloc(1 * sizeof(struct lista_tipo_t));
-
 	if (!novo_no)
 		return NULL;
 
@@ -43,6 +52,9 @@ struct lista_tipo_t* lista_anexarPrimeiro(struct lista_tipo_t* lista_tipo, struc
 
 void lista_deletarUltimo(struct lista_tipo_t** lista_tipo)
 {
+	if (lista_naoInicializada(*lista_tipo))
+		return;
+
 	struct lista_tipo_t* tmp_lista_tipo; 
 
 	for (tmp_lista_tipo = *lista_tipo; tmp_lista_tipo->proximo; tmp_lista_tipo = tmp_lista_tipo = tmp_lista_tipo->proximo);
@@ -55,6 +67,9 @@ void lista_deletarUltimo(struct lista_tipo_t** lista_tipo)
 
 void lista_deletarPrimeiro(struct lista_tipo_t** lista_tipo)
 {
+	if (lista_naoInicializada(*lista_tipo))
+		return;
+
 	struct lista_tipo_t* tmp_lista_tipo;
 
 	tmp_lista_tipo = (*lista_tipo)->proximo;
@@ -67,6 +82,9 @@ void lista_deletarPrimeiro(struct lista_tipo_t** lista_tipo)
 
 void lista_exibir(struct lista_tipo_t* lista_tipo)
 {
+	if (lista_naoInicializada(lista_tipo))
+		return;
+
 	for (; lista_tipo; lista_tipo = lista_tipo->proximo){
 		tipo_exibir(lista_tipo->tipo);
 	}
@@ -78,6 +96,9 @@ struct Tipo* lista_procurar(struct lista_tipo_t* lista_tipo, int id)
 {
 	struct Tipo* tipo_procurado;
 
+	if (lista_naoIncializda(lista_tipo))
+		return;
+	
 	for (; lista_tipo && tipo_pegarId(lista_tipo->tipo) != id; lista_tipo = lista_tipo->proximo);
 	if (!lista_tipo)
 		return NULL;	

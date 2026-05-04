@@ -17,9 +17,6 @@ class NoTipo
 
 class ListaTipo
 {
-	private:
-		NoTipo* no_principal;
-
 	public:
 		struct Iterador
 		{	
@@ -133,6 +130,10 @@ class ListaTipo
 
 			return tmp_tipo;
 		}
+
+
+	private:
+		NoTipo* no_pri
 };	
 
 #endif

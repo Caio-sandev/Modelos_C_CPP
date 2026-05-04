@@ -15,7 +15,8 @@ GENERIC_CPP=~/.arquivos_modelo/generc.cpp
 MAKEFILE=~/.arquivos_modelo/Makefile
 
 avisoErro() {
-	echo "Escreva: ~/.modelos_c_c++ [QUANTIDADE] [ARQUIVO] [OPCOES]..."
+	echo "Escreva: modelc [QUANTIDADE] [ARQUIVO] [OPCOES]..."
+	echo " "
 	echo "	-ARQUIVO: extensao do arquivo ('c' ou 'cpp')"
 	echo "	-QUANTIDADE: quantidade de arquivos para criar"
 	echo "  -OPCOES:"

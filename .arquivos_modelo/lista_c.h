@@ -5,6 +5,7 @@
 #include "dados_c.h"
 
 struct lista_tipo_t;
+int lista_naoInicializada(struct lista_tipo_t* lista_tipo);
 struct lista_tipo_t* lista_anexarPorUltimo(struct lista_tipo_t* lista_tipo, struct Tipo* tipo);
 struct lista_tipo_t* lista_anexarEmPrimeiro(struct lista_tipo_t* lista_tipo, struct Tipo* tipo);
 void lista_deletarPorUltimo(struct lista_tipo_t** lista_tipo);
