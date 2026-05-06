@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include "dados.h"
 
-int id_global = 0;
-
 struct Tipo
 {
 	int id;
@@ -14,9 +12,10 @@ struct Tipo* tipo_criarTudo(int id, void* dados)
 {
 	struct Tipo* novo_tipo = (struct Tipo*)malloc(1 * sizeof(struct Tipo));
 	
-	if (!novo_tipo)
+	if (!novo_tipo){
 		return NULL;
-	
+	}
+
 	novo_tipo->id = id;
 	novo_tipo->dados = dados;
 	
@@ -33,32 +32,49 @@ struct Tipo* tipo_criarZerado()
 	return novo_tipo;
 }
 
-void tipo_inserirId(struct Tipo* tipo, int id)
+int tipo_inserirId(struct Tipo* tipo, int id)
 {
+	if (!tipo)
+		return -1;
+
 	tipo->id = id;
 
-	return;
+	return 0;
 }
 
 void tipo_inserirDados(struct Tipo* tipo, void* dados)
 {
+	if (!tipo)
+		return -1;
+
 	tipo->dados = dados;
 
-	return;
+	return 0;
 }
 
 int tipo_pegarId(struct Tipo* tipo)
 {
+	if (!tipo)
+		return -1;
+
 	return tipo->id;
 }
 
 void* tipo_pegarDados(struct Tipo* tipo)
 {
+	if (!tipo)
+		return NULL;
+
 	return tipo->dados;
 }
 
 void tipo_exibir(struct Tipo* tipo)
 {
+	if (!tipo){
+		return;
+		printf("Tipo nao Incializado\n");
+	}
+
 	printf("-ID: %d\n-Dados: %c\n", tipo->id, *(tipo->dados));
 
 	return;
@@ -66,6 +82,8 @@ void tipo_exibir(struct Tipo* tipo)
 
 void tipo_gerarId(struct Tipo* tipo)
 {
+	static int id_global = 0;
+
 	if (!tipo)
 		return;
 

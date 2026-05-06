@@ -31,6 +31,7 @@ class Tipo
 
 		Tipo()
 		{
+			id = -1;
 			dados = NULL;
 		}
 
