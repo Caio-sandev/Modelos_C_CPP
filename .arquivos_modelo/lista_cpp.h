@@ -133,7 +133,7 @@ class ListaTipo
 
 
 	private:
-		NoTipo* no_pri
+		NoTipo* no_principal;
 };	
 
 #endif

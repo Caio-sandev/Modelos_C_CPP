@@ -8,9 +8,9 @@ DADOS_C_H=~/.arquivos_modelo/dados_c.h
 DADOS_C=~/.arquivos_modelo/dados.c
 DADOS_CPP_H=~/.aquivos_modelo/dados_cpp.h
 
-GENERIC_H=~/.arquivos_modelo/generc.h
-GENERIC_C=~/.arquivos_modelo/generc.c
-GENERIC_CPP=~/.arquivos_modelo/generc.cpp
+GENERIC_H=~/.arquivos_modelo/generic.h
+GENERIC_C=~/.arquivos_modelo/generic.c
+GENERIC_CPP=~/.arquivos_modelo/generic.cpp
 
 MAKEFILE=~/.arquivos_modelo/Makefile
 
@@ -22,7 +22,7 @@ avisoErro() {
 	echo "  -OPCOES:"
 	echo "   lista: cria arquivos de listas"
 	echo "   dados: cria arquivos de dados"
-	echo "   generc: cria arquivos genericos"
+	echo "   generic: cria arquivos genericos"
 
 	rm -rf ./apps
 	rm -rf ./bin
